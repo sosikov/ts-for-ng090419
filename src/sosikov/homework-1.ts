@@ -10,7 +10,6 @@ function isInArray(arr: unknown[], ...args: unknown[]): boolean {
         if (arr.indexOf(arg) === -1) {
             return false;
         }
-        continue;
     }
     return true;
 }
@@ -27,7 +26,7 @@ console.log(isInArray([1, '2', 3], 1, '2', 3, 4)); // false
  * @param args Аргументы, которые необходимо сложить
  */
 function summator(...args: (number | string)[]): number {
-    let result = 0;
+    let result: number = 0;
     for (let arg of [...args]) {
         if (typeof arg === 'string') {
             arg = parseInt(arg);
@@ -61,8 +60,10 @@ console.log(getUnique([1, '2', 3, 1, 4, 3, 4, 5, true, true])); // [ 1, '2', 3, 
  * @param data Массив данных
  * @param rowSize Количество элементов в подмассиве
  */
-function toMatrix(data: unknown[], rowSize: number): unknown[] {
-    const res: unknown[] = [];
+
+type sn = string | number
+function toMatrix(data: sn[], rowSize: number): sn[][] {
+    const res: sn[][] = [];
     data.reduce((acc: unknown[], next: unknown, index: number) => {
         if (acc.length === rowSize) {
             res.push(acc);

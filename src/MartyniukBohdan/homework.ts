@@ -25,11 +25,11 @@ function isInArray( arr: unknown[], ...args: unknown[]): boolean {
 type sn = number | string;
 
 function summator(...args: sn[]): sn {
-    return args.reduce(function(s, num) {
-        if (typeof s === 'number' && typeof num   === 'number') {
+    return args.reduce((s: number, num: sn) => {
+        if ( typeof num   === 'number') {
             return s + num;
         } else {
-            return parseInt(s as string) + parseInt(num as string);
+            return s + parseInt(num);
         }
     }, 0);
 }

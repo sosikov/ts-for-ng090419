@@ -1,280 +1,160 @@
-// interface IAccount {
-//     firstName: string;
-//     age: number;
-// }
+// ReactiveX = Iterator + Observer
+// RxJS ReactiveX => JS
+// import { Observable, Observer } from 'rxjs';
 //
-// const user = {
-//     firstName: 'Igor',
-//     age: 33
-// }
+// let count = 0;
+// // const sequence$: Observable<any> = from([1, 2, 3, 4, 5]);
+// const sequence$: Observable<number> = new Observable((obsever: Observer<number>) => {
+//     //let interval: number;
+//    // interval =
+//         setInterval(() => {
+//         obsever.next(count++);
+//         // if (count === 5) {
+//         //     obsever.complete();
+//         //     clearInterval(interval);
+//         // }
+//     }, 1000);
+// });
 //
-// let admin: typeof user = 1;
 //
-// class Account {
-//     public firstName!: string;
-//     public age!: number;
-// }
+// sequence$.subscribe((value: number) => {
+//     console.log('Sub 1', value);
+// }, () => {
+// }, () => {
+//     console.log('Complete');
+// });
 //
-// let a: Account = new Account();
+// setTimeout(()=>{
+//     sequence$.subscribe((value: number) => {
+//         console.log('Sub 2', value);
+//     }, () => {
+//     }, () => {
+//         console.log('Complete');
+//     });
+// }, 10000);
+//
 
-// let b: string = 's';
-// let c: string;
-// c = 's';
-// let a = 'sd';
-// a = 1;
+// import { fromEvent, Observable } from 'rxjs';
+// import { map } from 'rxjs/operators';
+//
+// const sequence$: Observable<MouseEvent> = fromEvent(document, 'click') as Observable<MouseEvent>;
+//
+// sequence$
+//     .pipe(
+//         // map((e: MouseEvent) => {
+//         //     return e.clientX;
+//         // })
+//     )
+//     .subscribe((x: number) => {
+//         console.log('Sub 1', x);
+//     });
+//
+// setTimeout(() => {
+//     sequence$
+//         .pipe(
+//             // map((e: MouseEvent) => {
+//             //     return e.clientX;
+//             // })
+//         )
+//         .subscribe((x: number) => {
+//             console.log('Sub 2', x);
+//         });
+// }, 10000);
 
-// let s: string = 'sd';
-// let b: boolean = true;
-// let n: number = NaN;
-// let nill: null = null;
-// let u: undefined = undefined;
-// let simb: symbol = Symbol('asd');
+// const sequance1$: Observable<number> = interval(1000);
+//
+// /*
+//    ---0---1---2---3---
+//       map((x)=>x*2)
+//    ---0---2---4---6---
+//  */
+//
+// const sequance2$: Observable<number> = sequance1$
+//     .pipe(map(x => x * 2));
+//
+// sequance2$.subscribe(v => console.log(v));
 
-// let a: any = 1;
-// a();
+// const sequance1$: Observable<number> = interval(1000);
 //
-// let v: void = undefined;
+// /*
+//    ---0---1---2---3---
+//       tap((x)=>x*9)
+//    ---0---1---2---3---
+//       map((x)=>x*2)
+//    ---0---2---4---6---
+//  */
 //
-// function f(): never {
-//     throw new Error('my error');
-// }
+// const sequance2$: Observable<number> = sequance1$
+//     .pipe(
+//         tap(x => console.log(x)),
+//         map(x => x * 2)
+//     );
 //
-// f();
-
-// type Acc = {
-//     firstName: string
-// };
-//
-// interface IAge {
-//     age: number;
-// }
-//
-// let arr: Acc[] = [{firstName: 'Igor'}];
-//
-// interface IAccount extends IAge, Acc {
-//     age: number;
-// }
-//
-// class User implements IAccount {
-//     public firstName!: string;
-//     public age!: number;
-// }
-
-// class Person implements IUser{
-// //    public  firsName!: string;
-// // }
-// //
-// // new User();
-// //
-// // fetch('localhost')
-// //     .then((res: Response) => res.json())
-// //     .then((user: IUser) => console.log(user))
-// generic -> interface/type/class/function
-// interface IAccount<IdType> {
-//     id: IdType;
-//     firstName: string;
-// }
-//
-// let user: IAccount<number>;
-// let admin: IAccount<string>;
-//
-// let arr: Array<string>
-// let arr1: string[]
-//
-// [1,2,3].map((a)=>a.)
-
-// function average<CustomType>(a: CustomType, b: CustomType, c: CustomType): string {
-//     let v: CustomType;
-//     const total = (a + b + c) / 3;
-//     return `Average is ${total}`;
-// }
-//
-// average<number>(1, 2, 2);
-// average<string>('1', '2', '2');
-// average<sn>(1, '2', 1);
-// // average('1', '2', 1);
-// // average(1, '2', 1);
-// const cc: number = average(1, 2, 1);
-
-// function average(a: number, b?: number, c?: number): string {
-//     let total: number = a;
-//     if (b !== undefined) {
-//         total += b;
-//     }
-//     if (c !== undefined) {
-//         total += c;
-//     }
-//     return `Average is ${total / 3}`;
-// }
-//
-// average(1);
-// average(1, 2);
-// average(1, 2, 4);
-// average<string>('1', '2', '2');
-// average<sn>(1, '2', 1);
-// // average('1', '2', 1);
-// // average(1, '2', 1);
-// const cc: number = average(1, 2, 1);
-
-// function average(a: number, b: number = 0, c: number = 0): string {
-//     const total: number = a + b + c;
-//     return `Average is ${total / 3}`;
-// }
-//
-// average(1);
-// average(1, 2);
-// average(1, 2, 4);
-// average(1, '2', 1);
-// average('1', '2', 1);
-// average(1, '2', 1);
-// const cc: number = average(1, 2, 1);
-
-// type sn = string | number;
-//
-// function average(a: number, b: string): string;
-// function average(a: number, b: number, c: number): string;
-// function average(a: string, b: string): string;
-// function average(_a: sn, _b: sn = 0, _c?: number): string {
-//     return `Average is ${2}`;
-// }
-//
-// average(1, '1');
-// average(1, 1, 2);
-// average('1', '2');
-//
-// function isString(arg: sn): arg is string {
-//     return typeof arg === 'string';
-// }
-//
-// // TODO error in reducer
-// function sum(...args: sn[]): number {
-//     return args.reduce((acc: number, next: sn) => {
-//         if (isString(next)) {
-//             acc += parseInt(next);
-//         } else {
-//             acc += next;
-//         }
-//         return acc;
-//     }, 0);
-// }
-//
-// sum(1, 2, 3);
-// sum(1, 2, 3, 4, 5);
-// sum(1, 2, '3', 4, 5);
-// sum(1, 2, '3', true, 5);
-
-// interface IPoint {
-//     x: number;
-//     y: number;
-//
-//     sum(): number;
-// }
-//
-// abstract class AbstractPoint {
-//     public x: number;
-//     private y: number;
-//
-//     public constructor(x: number, y: number) {
-//         this.x = x;
-//         this.y = y;
-//     }
-//
-//     public abstract ngOnInit(_x: number, _y: number): void;
-//
-//     public sum(): number {
-//         // this.x += 2;
-//         return this.x + this.y;
-//     }
-// }
-// let p1 = new AbstractPoint();
-//
-// class SuperPoint extends AbstractPoint {
-//     public constructor(
-//         x: number,
-//         y: number,
-//         protected _z: number
-//     ) {
-//         super(x, y);
-//         this.x += 1;
-//         this.ngOnInit(x, y);
-//     }
-//
-//
-//     public ngOnInit(_x: number, _y: number): void {
-//
-//     }
-// }
-//
-// const p: SuperPoint = new SuperPoint(2, 3, 3);
-//
-//
-// class Point extends SuperPoint {
-//     public constructor(
-//         x: number,
-//         y: number,
-//         _z: number
-//     ) {
-//         super(x, y, _z);
-//     }
-//
-//     public get z(): number {
-//         return this._z;
-//     }
-//
-//     public set z(v: number) {
-//         this._z = v;
-//     }
-//
-//     public sum(): number {
-//         // this.x += 2;
-//         this.y += 3;
-//         return super.sum();
-//     }
-// }
-//
-// class Singleton {
-//     private static _instance: Singleton;
-//
-//     private constructor() {
-//     }
-//
-//     public static getInstance(): Singleton {
-//         if (!Singleton._instance) {
-//             Singleton._instance = new Singleton();
-//         }
-//         return Singleton._instance;
-//     }
-// }
-//
-// let ins1: Singleton = Singleton.getInstance();
-// let ins2: Singleton = Singleton.getInstance();
+// sequance2$.subscribe(_v => console.log());
 
 
-function logMethod(logMsg: string): MethodDecorator {
-    return (_target: Object, _methodName: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
-        const originalValue: Function = descriptor.value;
-        return {
-            ...descriptor,
-            value: (...arg: unknown[]) => {
-                const result: unknown = originalValue(...arg);
-                // tslint:disable-next-line
-                // console.log('Target', _target);
-                // tslint:disable-next-line
-                console.log(`${logMsg} ${_methodName as string}(${arg.join(',')}) => ${result}`);
-                return result;
-            }
-        };
-    }
+// const sequance1$: Observable<number> = interval(1000);
+//
+// /*
+//    ---0---1---2---3---4--
+//       take(3)
+//    ---0---1---2|
+//       skip(2)
+//    -----------2|
+//  */
+//
+// const sequance2$: Observable<number> = sequance1$
+//     .pipe(
+//         take(1),
+//         skip(2),
+//     );
+//
+// sequance2$.subscribe(_v => console.log(_v));
+
+//
+// const sequance1$: Observable<number> = interval(1000).pipe(take(4));
+// const sequance2$: Observable<number> = interval(1000).pipe(skip(6), take(3));
+//
+// /*
+//  sequance1$  ---0---1---2---3|
+//  sequance2$  -----------------------6---7---8|
+//                   concat()
+//  sequance3$  ---0---1---2---3-----------------6---7---8|
+//  */
+//
+// const sequance3$: Observable<number> = concat<number>(sequance1$, sequance2$);
+//
+// sequance3$.subscribe(_v => console.log(_v));
+
+
+import { fromEvent, Observable, zip } from "rxjs";
+import { map } from "rxjs/operators";
+
+const touchStart$: Observable<number> = getX(fromEvent(document, 'touchstart') as Observable<TouchEvent>);
+const touchEnd$: Observable<number> = getX(fromEvent(document, 'touchend') as Observable<TouchEvent>);
+
+function getX(source$: Observable<TouchEvent>): Observable<number> {
+    return source$
+        .pipe(
+            map(({changedTouches}: TouchEvent) => changedTouches[0].clientX)
+        );
 }
 
-class MathLib {
-    @logMethod('We call')
-    public areaOfCircle(r: number): number {
-        return Math.PI * r ** 2;
-    }
+function swipe(source$: Observable<[number, number]>) {
+    return source$
+        .pipe(
+            map(([startX, endX]: [number, number]) => {
+                return startX - endX;
+            })
+        );
 }
 
-const lib: MathLib = new MathLib();
+const swipe$: Observable<number> = swipe(zip<[number, number]>(touchStart$, touchEnd$));
 
-let area1: number = lib.areaOfCircle(10);
-let area2: number = lib.areaOfCircle(2);
+swipe$.subscribe((direction: number) => {
+    if (direction > 0) {
+        console.log('Swipe left');
+        return;
+    }
+    console.log('Swipe right');
+})

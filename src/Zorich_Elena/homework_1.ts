@@ -13,7 +13,7 @@ function isInArray(arr: datatype[], ...arg: datatype[]): boolean {
 //  Написать функцию summator(), которая суммирует переданые ей аргументы.
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 
-function summator(...arg: datatype[]): number{
+function summator(...arg: datatype[]): number {
     return arg.reduce((partial_sum: number, x: datatype) => {
         //Check for string
         const numItem: number = typeof x === 'string' ? parseInt(x) : x;
@@ -32,7 +32,7 @@ function summator(...arg: datatype[]): number{
 
 function getUnique(...arg: datatype[]): datatype[] {
     const argUnique = new Set(arg);
-    return  Array.from(argUnique.values());
+    return Array.from(argUnique.values());
 }
 
 // 4)
@@ -42,15 +42,15 @@ function getUnique(...arg: datatype[]): datatype[] {
 //  Оригинальный массив не должен быть изменен.
 
 function toMatrix(data: datatype[], rowSize: number): datatype[][] {
-    
-    // Declaring a Two-Dimensional array
-    const result: datatype[][] = []; 
 
-    for(let i:number = 0; i <= data.length; i += rowSize){
-    // Slice() is non-destructive to the original array
+    // Declaring a Two-Dimensional array
+    const result: datatype[][] = [];
+
+    for (let i: number = 0; i <= data.length; i += rowSize) {
+        // Slice() is non-destructive to the original array
         result.push(data.slice(i, i + rowSize));
     }
     return result;
 }
 
-toMatrix(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r'], 5)
+toMatrix(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'], 5)

@@ -14,7 +14,7 @@ function isInArray(arr: unknown[], ...args: unknown[]): boolean {
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 type sn = string | number;
 function summator(...args: sn[]): number {
-  return args.reduce((acc: number, next: sn) => {
+  return args.reduce((acc: number, next: sn): number => {
     //проверка на строку
     if (typeof next === 'string') {
       acc += parseInt(next);
@@ -22,10 +22,10 @@ function summator(...args: sn[]): number {
       acc += next;
     }
     //проверка на NaN
-    const  checkedNan = (num: number) => {
-      isNaN(acc) ? 0 : acc;
+    const  checkedNan = () => {
+      return isNaN(acc) ? 0 : acc;
     };
-    return checkedNan;
+    return checkedNan();
   }, 0);
 }
 
@@ -47,7 +47,7 @@ function getUnique(args: unknown []): unknown [] {
 //  возвращает новый массив. Число показывает количество элементов в подмассивах,
 //  элементы подмассивов беруться из массива data.
 //  Оригинальный массив не должен быть изменен.
-function toMatrix(data: unknown[], rowSize: number): unknown {
+function toMatrix(data: unknown[], rowSize: number): unknown[][] {
   const newArray: unknown[] = [];
   data.reduce((arr: unknown[], next: any, index: number): unknown[] => {
     if (arr.length === rowSize) {
