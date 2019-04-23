@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["dom", "es2016"],
+   /* Enables experimental support for emitting type metadata for decorators. */
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}
