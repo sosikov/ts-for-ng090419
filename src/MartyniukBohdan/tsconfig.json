@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    /* Enables experimental support for emitting type metadata for decorators. */
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}
